@@ -6,6 +6,7 @@ import { ListaDestinosComponent } from './lista-destinos/lista-destinos.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
+import { ListadeejemploComponent } from './listadeejemplo/listadeejemplo.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TarjetasComponent } from './tarjetas/tarjetas.component';
     NavbarComponent,
     FooterComponent,
     TarjetasComponent,
+    ListadeejemploComponent,
   ],
   imports: [
     BrowserModule
