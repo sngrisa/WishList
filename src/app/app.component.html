@@ -1,13 +1,11 @@
 <div class="container content">
   <app-navbar></app-navbar>
-  <p>
-    <span class="badge badge-light">Bienvenidos a la aplicacion de Angular de WishList!!!. Ingrese el nombre del destino y la Imagen Url en el siguiente formulario. </span>
-  </p>
-  <p>
-    <span class="badge badge-dark"> Por Ejemplo:</span>
-    <app-listadeejemplo></app-listadeejemplo>
-  </p>
-
-    <app-lista-destinos></app-lista-destinos>
+  <div class="page-header">
+    <div class="navLinks">
+  <a [routerLink]="['/home']">Home </a>
+  <a [routerLink]="['/destino']">Destino</a>
+</div>
+  </div>
+    <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>
