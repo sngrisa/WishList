@@ -10,6 +10,10 @@ import { ListadeejemploComponent } from './listadeejemplo/listadeejemplo.compone
 import { RouterModule, Routes} from '@angular/router';
 import { DestinoDetalleComponent } from './destino-detalle/destino-detalle.component';
 import { MensajeComponent } from './mensaje/mensaje.component';
+import { UserService } from './user.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormDestinoViajeComponent } from './form-destino-viaje/form-destino-viaje.component';
+import { DestinosApiClient } from './models/destinos-api-client.model';
 
 const routes: Routes =[
    {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -28,12 +32,18 @@ const routes: Routes =[
     ListadeejemploComponent,
     DestinoDetalleComponent,
     MensajeComponent,
+    FormDestinoViajeComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    UserService,
+    DestinosApiClient,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
