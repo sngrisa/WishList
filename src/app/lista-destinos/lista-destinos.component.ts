@@ -15,8 +15,8 @@ export class ListaDestinosComponent implements OnInit {
   this.onItemAdded = new EventEmitter();
   this.updates = [];
   this.destinosApiClient.subscribeOnChange((d:ViajeDestino) => {
-    if(d !=null){
-      this.updates.push('Se ha elegido a '+ d.nombre);
+    if(d!=null){
+      this.updates.push('Se ha elegido a '+d.nombre);
     }
   });
   }
