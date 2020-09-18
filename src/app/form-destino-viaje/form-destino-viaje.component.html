@@ -12,8 +12,9 @@
         <p>
 
         </p>
-        <div *ngIf="!fg.controls['nombre'].valid">Nombre Invalido!</div>
-        <div *ngIf="fg.controls['nombre'].hasError('required')">Nombre Requerido!</div>
+        <div *ngIf="fg.controls['nombre'].hasError('required')"> Campo de Nombre Vacio!</div>
+        <div *ngIf="fg.controls['nombre'].hasError('invalidNombre')"> Nombre Invalido!</div>
+        <div *ngIf="fg.controls['nombre'].hasError('minLongNombre')"> El nombre debe tener como minimo {{minLongitud}} de caracteres!</div>
   </div>
   <div class="form-group">
     <label for="Imagen Url">Imagen Url</label>
@@ -23,8 +24,9 @@
         <p>
 
         </p>
-        <div *ngIf="!fg.controls['url'].valid">Url Invalida!</div>
-        <div *ngIf="fg.controls['url'].hasError('required')">Url Requerida!</div>
+        <div *ngIf="fg.controls['url'].hasError('required')"> Campo de Url Vacio!</div>
+        <div *ngIf="fg.controls['url'].hasError('invalidUrl')"> Url Invalida!</div>
+        <div *ngIf="fg.controls['url'].hasError('minLongUrl')"> La Url debe tener como minimo {{minLongitud}} de caracteres!</div>
   </div>
   <button type="submit" class="btn btn-primary" *ngIf="fg.valid">Guardar!</button>
 </form>

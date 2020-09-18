@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn } from '@angular/forms';
 import { ViajeDestino } from '../models/viaje-destino.model';
 
 
@@ -13,14 +13,23 @@ import { ViajeDestino } from '../models/viaje-destino.model';
 export class FormDestinoViajeComponent implements OnInit {
   @Output() onItemAdded: EventEmitter<ViajeDestino>;
   fg: FormGroup;
-
+  minLongitud = 3;
   constructor(private fb: FormBuilder) { 
     //inicializar
+    this.minLongitud = 3;
     this.onItemAdded = new EventEmitter();
     //vinculacion con tag html
     this.fg = this.fb.group({
-      nombre: ['', Validators.required],
-      url: ['', Validators.required]
+      nombre: ['', Validators.compose([
+        Validators.required,
+        this.nombreValidator,
+        this.nombreValidatorParametrizable(this.minLongitud),
+      ])],
+      url: ['', Validators.compose([
+        Validators.required,
+        this.UrlValidator,
+        this.UrlValidatorParametrizable(this.minLongitud),
+      ])]
     });
     
     //observador de tipeo
@@ -37,5 +46,42 @@ export class FormDestinoViajeComponent implements OnInit {
     this.onItemAdded.emit(d);
     return false;
   }
+  
+  nombreValidator(control: FormControl): {[s: string]: boolean}{
+  let l =control.value.toString().trim().length;
+  if( l > 0 && l < 5 ){
+    return { invalidNombre: true};
+  }
+     return null;
+  }
 
+  nombreValidatorParametrizable(minLong: number): ValidatorFn {
+    return (control: FormControl): {[s: string]: boolean} | null => {
+      let l =control.value.toString().trim().length;
+      if( l > 0 && l <minLong){
+        return { minLongNombre: true};
+      }
+      return null;
+    }
+
+  }
+
+  UrlValidator(control: FormControl): {[s: string]: boolean}{
+    let l =control.value.toString().trim().length;
+    if( l > 0 && l < 5 ){
+      return { invalidUrl: true};
+    }
+       return null;
+    }
+
+    UrlValidatorParametrizable(minLong: number): ValidatorFn {
+      return (control: FormControl): {[s: string]: boolean} | null => {
+        let l =control.value.toString().trim().length;
+        if( l > 0 && l <minLong){
+          return { minLongUrl: true};
+        }
+        return null;
+      }
+  
+    }
 }
