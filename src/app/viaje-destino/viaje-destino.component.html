@@ -19,11 +19,14 @@
                             </span>
                         </li>
                     </p>
-                    <a	href="#"	class="btn-card" (click)="ir()">Marcar</a>
+                    <a	href="#" class="btn-card" (click)="ir()"> Marcar</a>
                     <span *ngIf="destino.isSelected()">
-                        <span ngNonBindable>{{PREFERIDO}}</span>
-                    </span>		
-                    <a [routerLink]="['/destino']"> Ver Detalle</a>	
+                        <span ngNonBindable> Marcado como Favorito</span>
+                    </span>
+                    <p>
+
+                    </p>		
+                    <a [routerLink]="['/destino', 'destino.id']"> Ver Detalle</a>	
 </div>
 </div>
     

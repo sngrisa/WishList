@@ -2,22 +2,22 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { ViajeDestino } from './viaje-destino.model';
 
 export class DestinosApiClient {
-	destinos: ViajeDestino[];
+	destino: ViajeDestino[];
 	current: Subject<ViajeDestino> = new BehaviorSubject<ViajeDestino>(null);
 	constructor() {
-       this.destinos = [];
+       this.destino = [];
 	}
 	add(d:ViajeDestino){
-	  this.destinos.push(d);
+	  this.destino.push(d);
 	}
 	getAll(): ViajeDestino []{
-	  return this.destinos;
+	  return this.destino;
 	}
-	getbyId(id:String):ViajeDestino{
-		return this.destinos.filter(function(d) {return d.id.toString() == id; })[0];
+	getbyId(id : String): ViajeDestino{
+		return this.destino.filter(function(d) { return d.id.toString() == id; })[0];
 	}
 	elegir(d: ViajeDestino){
-		this.destinos.forEach(x => x.setSelected(false));
+		this.destino.forEach(x => x.setSelected(false));
 		d.setSelected(true);
 		this.current.next(d);
 	}

@@ -5,23 +5,26 @@ import { DestinosApiClient } from './../models/destinos-api-client.model';
 @Component({
   selector: 'app-lista-destinos',
   templateUrl: './lista-destinos.component.html',
-  styleUrls: ['./lista-destinos.component.css']
+  styleUrls: ['./lista-destinos.component.css'],
+  providers: [DestinosApiClient]
 })
+
 export class ListaDestinosComponent implements OnInit {
   @Output() onItemAdded: EventEmitter<ViajeDestino>;
   updates: string[];
 
-  constructor(public destinosApiClient: DestinosApiClient) { 
+  constructor(
+    public destinosApiClient: DestinosApiClient) { 
   this.onItemAdded = new EventEmitter();
   this.updates = [];
-  this.destinosApiClient.subscribeOnChange((d:ViajeDestino) => {
-    if(d!=null){
-      this.updates.push('Se ha elegido a '+d.nombre);
-    }
-  });
   }
-  
-  ngOnInit(): void{
+
+  ngOnInit(){
+    this.destinosApiClient.subscribeOnChange((d: ViajeDestino) => {
+      if(d !=null){
+        this.updates.push('Se ha elegido a '+ d.nombre);
+      }
+    });
   }
   
   agregado(d: ViajeDestino){
@@ -29,8 +32,8 @@ export class ListaDestinosComponent implements OnInit {
     this.onItemAdded.emit(d);
   }
 
-  elegido(e: ViajeDestino){
-    this.destinosApiClient.elegir(e);
+  elegido(d: ViajeDestino){
+    this.destinosApiClient.elegir(d);
     };
   }
 
