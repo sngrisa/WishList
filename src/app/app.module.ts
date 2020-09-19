@@ -14,6 +14,7 @@ import { UserService } from './user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormDestinoViajeComponent } from './form-destino-viaje/form-destino-viaje.component';
 import { DestinosApiClient } from './models/destinos-api-client.model';
+import { ComboboxComponent } from './combobox/combobox.component';
 
 const routes: Routes =[
    {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -33,6 +34,7 @@ const routes: Routes =[
     DestinoDetalleComponent,
     MensajeComponent,
     FormDestinoViajeComponent,
+    ComboboxComponent,
   ],
   imports: [
     BrowserModule,

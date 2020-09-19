@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 
 @Component({
@@ -8,9 +9,17 @@ import { UserService } from './user.service';
   providers: [UserService],
 })
 export class AppComponent {
-  title:"Gainsborough Viajes";
+  title = 'Angular-WhishList';
+  time = new Observable(observer =>{
+    setInterval(() => observer.next(new Date().toString()), 1000);
+  });
+
   Agregar(titulo: HTMLInputElement){
     console.log(titulo.value);
+    }
+
+    destinoAgregado(d){
+      alert(d.nombre);
     }
 }
 
