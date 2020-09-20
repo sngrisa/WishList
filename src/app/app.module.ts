@@ -15,12 +15,32 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormDestinoViajeComponent } from './form-destino-viaje/form-destino-viaje.component';
 import { DestinosApiClient } from './models/destinos-api-client.model';
 import { ComboboxComponent } from './combobox/combobox.component';
+import { DestinosViajesState, reducerDestinosViajes, intializeDestinosViajesState, DestinosViajesEffects } from './models/destinos-viajes-state.model';
+import { ActionReducerMap, INITIAL_STATE, ReducerObservable } from '@ngrx/store';
+import { StoreModule as NgRxStoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { _INITIAL_STATE } from '@ngrx/store/src/tokens';
 
 const routes: Routes =[
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: 'home', component: ListaDestinosComponent},
    {path: 'destino', component: DestinoDetalleComponent},
 ];
+
+// Redux Init
+export interface AppState{
+  destinos: DestinosViajesState;
+}
+
+const reducers: ActionReducerMap<AppState> ={
+  destinos: reducerDestinosViajes
+};
+
+let reducersInitialsState = {
+  destinos: intializeDestinosViajesState()
+};
+
+// Redux Fin Init
 
 @NgModule({
   declarations: [
@@ -35,13 +55,17 @@ const routes: Routes =[
     MensajeComponent,
     FormDestinoViajeComponent,
     ComboboxComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgRxStoreModule.forRoot(reducers, ({initialState: reducersInitialsState})),
+    EffectsModule.forRoot([DestinosViajesEffects]),
   ],
+
   providers: [
     UserService,
     DestinosApiClient,
