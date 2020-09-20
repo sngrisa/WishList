@@ -6,7 +6,6 @@ import { ElegidoFavoritoAction, NuevoDestinoAction } from './destinos-viajes-sta
 
 export class DestinosApiClient {
 	destino: ViajeDestino[];
-  current: Subject<ViajeDestino> = new BehaviorSubject<ViajeDestino>(null);
 	constructor() {
        this.destino = [];
   }
@@ -22,9 +21,5 @@ export class DestinosApiClient {
 	elegir(d: ViajeDestino){
 		this.destino.forEach(x => x.setSelected(false));
 		d.setSelected(true);
-		this.current.next(d);
-	}
-	subscribeOnChange(fn){
-		this.current.subscribe(fn);
 	}
 }
