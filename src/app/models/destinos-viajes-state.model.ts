@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { ViajeDestino } from './viaje-destino.model';
 import { DestinosApiClient } from './destinos-api-client.model';
 import { HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 
 // ESTADO
 export interface DestinosViajesState {

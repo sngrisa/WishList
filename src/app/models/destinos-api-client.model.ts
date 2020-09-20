@@ -1,14 +1,17 @@
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ViajeDestino } from './viaje-destino.model';
+import { Store } from '@ngrx/store';
+import { AppState } from './../app.module';
+import { ElegidoFavoritoAction, NuevoDestinoAction } from './destinos-viajes-state.model';
 
 export class DestinosApiClient {
 	destino: ViajeDestino[];
-	current: Subject<ViajeDestino> = new BehaviorSubject<ViajeDestino>(null);
+  current: Subject<ViajeDestino> = new BehaviorSubject<ViajeDestino>(null);
 	constructor() {
        this.destino = [];
-	}
+  }
 	add(d:ViajeDestino){
-	  this.destino.push(d);
+    this.destino.push(d);
 	}
 	getAll(): ViajeDestino []{
 	  return this.destino;

@@ -16,16 +16,17 @@ import { FormDestinoViajeComponent } from './form-destino-viaje/form-destino-via
 import { DestinosApiClient } from './models/destinos-api-client.model';
 import { ComboboxComponent } from './combobox/combobox.component';
 import { DestinosViajesState, reducerDestinosViajes, intializeDestinosViajesState, DestinosViajesEffects } from './models/destinos-viajes-state.model';
-import { ActionReducerMap, INITIAL_STATE, ReducerObservable } from '@ngrx/store';
+import { ActionReducerMap, INITIAL_STATE, ReducerObservable, Store } from '@ngrx/store';
 import { StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { _INITIAL_STATE } from '@ngrx/store/src/tokens';
 
 const routes: Routes =[
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: 'home', component: ListaDestinosComponent},
    {path: 'destino', component: DestinoDetalleComponent},
 ];
+
+
 
 // Redux Init
 export interface AppState{
@@ -62,7 +63,7 @@ let reducersInitialsState = {
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    NgRxStoreModule.forRoot(reducers, ({initialState: reducersInitialsState})),
+    NgRxStoreModule.forRoot(reducers, ({initialState: reducersInitialsState })),
     EffectsModule.forRoot([DestinosViajesEffects]),
   ],
 
