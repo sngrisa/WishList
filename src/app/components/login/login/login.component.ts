@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   login(username: string, password: string): boolean {
     this.mensajeError = '';
     if (!this.authService.login(username, password)) {
-      this.mensajeError = 'Login incorrecto.';
+      this.mensajeError = 'Usuario o contraseña erronea. Verifique el usuario y la contraseña que sean correctos';
       setTimeout(function() {
         this.mensajeError = '';
       }.bind(this), 2500);

@@ -25,15 +25,37 @@ import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
 import { UsuarioLogueadoGuard } from './guards/usuario-logueado/usuario-logueado.guard';
 import { AuthService } from './services/auth.service';
+import { VuelosComponentComponent } from './components/vuelos/vuelos-component/vuelos-component.component';
+import { VuelosMainComponentComponent } from './components/vuelos/vuelos-main-component/vuelos-main-component.component';
+import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-info-component/vuelos-mas-info-component.component';
+import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
+import { VuelosComponent } from './components/vuelos/vuelos/vuelos.component';
+import { ReservasModule } from './reservas/reservas.module';
+
+export const childrenRoutesVuelos: Routes = [
+  {path: '', redirectTo: 'main', pathMatch:'full'},
+  {path: 'main', component: VuelosMainComponentComponent},
+  {path: 'mas-info', component: VuelosMasInfoComponentComponent},
+  {path: ':id', component: VuelosDetalleComponent},
+];
 
 const routes: Routes =[
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: 'home', component: ListaDestinosComponent},
-   {path: 'destino', component: DestinoDetalleComponent},
+   {path: 'destino/:id', component: DestinoDetalleComponent},
    {path: 'login', component: LoginComponent},
+   {path: 'reservas', component: ReservasModule},
    {path: 'protected', component: ProtectedComponent,
    canActivate: [UsuarioLogueadoGuard],
   },
+
+  {
+    path: 'vuelos',
+    component: VuelosComponent,
+    canActivate: [ UsuarioLogueadoGuard ],
+    children: childrenRoutesVuelos,
+  }
+ 
 ];
 
 
@@ -68,6 +90,11 @@ let reducersInitialsState = {
     ComboboxComponent,
     LoginComponent,
     ProtectedComponent,
+    VuelosComponentComponent,
+    VuelosMainComponentComponent,
+    VuelosMasInfoComponentComponent,
+    VuelosDetalleComponent,
+    VuelosComponent,
 
   ],
   imports: [
@@ -78,6 +105,7 @@ let reducersInitialsState = {
     NgRxStoreModule.forRoot(reducers, ({initialState: reducersInitialsState })),
     EffectsModule.forRoot([DestinosViajesEffects]),
     StoreDevtoolsModule.instrument(),
+    ReservasModule,
   ],
 
   providers: [
