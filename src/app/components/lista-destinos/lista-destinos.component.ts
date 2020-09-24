@@ -3,7 +3,6 @@ import { ViajeDestino } from './../../models/viaje-destino.model';
 import { DestinosApiClient } from './../../models/destinos-api-client.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.module';
-import { NuevoDestinoAction, ElegidoFavoritoAction } from '../../models/destinos-viajes-state.model';
 
 @Component({
   selector: 'app-lista-destinos',
