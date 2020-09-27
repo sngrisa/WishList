@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, forwardRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn } from '@angular/forms';
-import { fromEvent, pipe } from 'rxjs';
-import { ViajeDestino } from '../../models/viaje-destino.model';
+import { fromEvent } from 'rxjs';
+import { DestinoViaje } from '../../models/destino-viaje.model';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
+import { ajax } from 'rxjs/ajax';
 import { AppConfig, APP_CONFIG } from 'src/app/app.module';
 
 
@@ -14,30 +14,28 @@ import { AppConfig, APP_CONFIG } from 'src/app/app.module';
 })
 
 export class FormDestinoViajeComponent implements OnInit {
-  @Output() onItemAdded: EventEmitter<ViajeDestino>;
+  @Output() onItemAdded: EventEmitter<DestinoViaje>;
   fg: FormGroup;
   minLongitud = 3;
   searchResults: string [];
 
   constructor(public fb: FormBuilder, @Inject(forwardRef(() => APP_CONFIG )) private config: AppConfig) { 
-    //inicializar
-    this.minLongitud = 3;
     this.onItemAdded = new EventEmitter();
-    //vinculacion con tag html
+
     this.fg = this.fb.group({
       nombre: ['', Validators.compose([
         Validators.required,
         this.nombreValidator,
         this.nombreValidatorParametrizable(this.minLongitud),
       ])],
+
       url: ['', Validators.compose([
         Validators.required,
         this.UrlValidator,
         this.UrlValidatorParametrizable(this.minLongitud),
       ])]
     });
-    
-    //observador de tipeo
+
     this.fg.valueChanges.subscribe((form: any) =>{
       console.log('cambio el formulario: ', form);
     })
@@ -57,7 +55,7 @@ export class FormDestinoViajeComponent implements OnInit {
 
 
   guardar(nombre: string, url: string): boolean {
-    const d = new ViajeDestino(nombre, url);
+    const d = new DestinoViaje(nombre, url);
     this.onItemAdded.emit(d);
     return false;
   }
